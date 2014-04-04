@@ -11,3 +11,52 @@
  *= require_self
  *= require_tree .
  */
+
+body{
+	background-color: #D7FCFF;
+	padding: 0;
+	margin: 0;
+	font-family: Helvetica;
+}
+
+.title{
+	padding: 10px;
+	font-size: 2em;
+	width: 100%;
+	height: 100%;
+}
+
+.title .brand{
+	font-size: 1.4em;
+	color: #fff;
+	-webkit-text-stroke-width: 1px;
+   	-webkit-text-stroke-color: black;
+   }
+
+.content{
+	margin: 10px;
+}
+
+.nav{
+	width: 100%;
+	background-color: #fff;
+}
+
+.nav ul{
+	padding: 0 0 0 2px;
+	list-style: none;
+}
+
+.nav ul li{
+	display: inline;
+	margin: 0 15px 0 0;
+}
+
+.nav ul li a:visited, a:link, a:active{
+	color: #000;
+}
+
+.image{
+	height: 100px;
+	width: 100px;
+}

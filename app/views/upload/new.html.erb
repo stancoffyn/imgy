@@ -1,0 +1,14 @@
+<%= form_tag({action: :create}, multipart: true) do %>
+  Name: <%= text_field_tag(:name) %><br />
+  <div id="load_from_url">
+  <%= check_box_tag(:from_url) %>
+  <%= label_tag(:from_url, "Load image from url") %><br />
+  </div>
+  <%= check_box_tag(:animated) %>
+  <%= label_tag(:animated, "Animated gif") %>
+  <p>
+    <div id='file-upload'><%= file_field_tag 'image' %></div>
+    <div id='url-upload' style="display:none;"><%= text_field_tag(:url_field) %></div>
+  </p>
+  <%= submit_tag('save') %>
+<% end %>

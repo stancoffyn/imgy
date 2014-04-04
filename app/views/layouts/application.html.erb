@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Testsite</title>
+  <title>IMGY</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div class="title"><span class="brand">IMGY</span> - houck's image source</div>
+<div class="nav">
+	<ul>
+		<li><%= link_to 'HOME', home_path %></li>
+		<li><%= link_to 'UPLOAD', new_upload_path %></li>
+	</ul>
+</div>
+<div class="content">
+	<%= yield %>
+</div>
 </body>
 </html>

@@ -15,7 +15,7 @@ development:
   pool: 5
   username: root
   password: 'W00tW00t'
-  socket: /var/lib/mysql/mysql.sock
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -23,17 +23,17 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: testsite_test
+  database: imgy_test
   pool: 5
   username: root
-  password:
-  socket: /var/lib/mysql/mysql.sock
+  password: 'W00tW00t'
+  socket: /tmp/mysql.sock
 
 production:
   adapter: mysql2
   encoding: utf8
-  database: testsite_production
+  database: imgy
   pool: 5
   username: root
   password:
-  socket: /var/lib/mysql/mysql.sock
+  socket: /tmp/mysql.sock
