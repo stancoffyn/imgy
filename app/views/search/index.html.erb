@@ -1,14 +1,16 @@
-<h1>Welcome!</h1>
 <%= form_tag('/search', method: 'get')  do %>
   <%= label_tag(:query, 'Search: ') %>
   <%= text_field_tag(:query) %>
   <%= submit_tag("Search") %>
 <% end %>
-<p>
+
+<%  if(@tag.nil?) %>
+  <p>There were no records found for that name</p>
+<% else %>
   <ul>
     <% @images.each do |image| %>
       <li>
-          Name: <%= image.name %><br />
+        Name: <%= image.name %><br />
           <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), "/uploads/#{image.name}"
           %><br />
           tags:
@@ -20,4 +22,4 @@
       </li>
     <% end %>
   </ul>
-</p>
+<%end%>

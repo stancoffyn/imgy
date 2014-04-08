@@ -8,6 +8,12 @@ ul{
 }
 
 li{
-  display: inline;
+  display: inline-block;
   margin: 0 15px 0 0;
+}
+
+.tags li{
+  display: block;
+  background-color: lightblue; 
+  border: 1px solid cornflowerblue;
 }
