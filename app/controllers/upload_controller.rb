@@ -4,6 +4,7 @@ require 'open-uri'
 class UploadController < ApplicationController
   def new
     @image = Image.new  
+    @tags = Tag.all
   end
 
   def create
@@ -48,6 +49,18 @@ class UploadController < ApplicationController
       @image.image_type = 'static'
     end
 
+    if !params[:tags].nil?
+      tags = params[:tags].split(',')
+      tags.each do |t|
+        tag = Tag.find_by name: t.strip
+        if tag.nil?
+          tag = Tag.create!(name: t.strip)
+        end
+
+        @image.tags.push tag
+      end
+    end
+
     respond_to do |format|
       if @image.save
         format.html { redirect_to home_path, notice: 'image was successfully created.' }
@@ -78,6 +91,10 @@ class UploadController < ApplicationController
 
     if !params[:animated].nil?
       params.require(:animated)
+    end
+
+    if !params[:tags].nil?
+      params.require(:tags)
     end
   end
 end

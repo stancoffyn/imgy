@@ -3,8 +3,15 @@
 <ul>
 <% @images.each do |image| %>
   <li>
+      Name: <%= image.name %><br />
       <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), "/uploads/#{image.name}"
-      %>
+      %><br />
+      tags:
+      <ul>
+      <% image.tags.each do |tag| %>
+        <li><%=tag.name %></li>
+      <% end %>
+      </ul>
   </li>
 <% end %>
 </ul>

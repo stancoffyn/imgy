@@ -14,7 +14,7 @@ development:
   database: imgy_dev
   pool: 5
   username: root
-  password: 'W00tW00t'
+  password: 'adSsn24o'
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -26,7 +26,7 @@ test:
   database: imgy_test
   pool: 5
   username: root
-  password: 'W00tW00t'
+  password: 'adSsn24o'
   socket: /tmp/mysql.sock
 
 production:
@@ -35,5 +35,5 @@ production:
   database: imgy
   pool: 5
   username: root
-  password:
+  password: 'adSsn24o'
   socket: /tmp/mysql.sock

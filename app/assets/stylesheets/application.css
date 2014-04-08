@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require jquery.ui.all
  */
 
 body{
@@ -57,6 +58,5 @@ body{
 }
 
 .image{
-	height: 100px;
 	width: 100px;
 }
