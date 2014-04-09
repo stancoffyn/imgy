@@ -3,7 +3,12 @@
   <%= text_field_tag(:query) %>
   <%= submit_tag("Search") %>
 <% end %>
-
+<script>
+var tags = <%==   @all_tags  %>;
+  $(function(){
+    $("#query").autocomplete({source: tags});
+  });
+</script>
 <%  if(@tags.nil?) %>
   <p>There were no records found for that name</p>
 <% else %>
