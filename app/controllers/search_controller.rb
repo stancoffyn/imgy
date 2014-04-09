@@ -2,11 +2,11 @@ class SearchController < ApplicationController
   def index
     params.require(:query)
     @query = params[:query]
-    @tag = Tag.where('name like ?', '%' + @query + '%').first
-    @images
+    @tags = Tag.where('name like ?', '%' + @query + '%')
+    @images = Hash.new
 
-    if(!@tag.nil?)
-      @images = @tag.images
+    @tags.each do |tag|
+        @images[tag.name] = tag.images
     end
   end
 end

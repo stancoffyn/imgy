@@ -4,22 +4,25 @@
   <%= submit_tag("Search") %>
 <% end %>
 
-<%  if(@tag.nil?) %>
+<%  if(@tags.nil?) %>
   <p>There were no records found for that name</p>
 <% else %>
-  <ul>
-    <% @images.each do |image| %>
-      <li>
-        Name: <%= image.name %><br />
-          <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), "/uploads/#{image.name}"
-          %><br />
-          tags:
-          <ul class='tags'>
-          <% image.tags.each do |tag| %>
-            <li><%=tag.name %></li>
-          <% end %>
-          </ul>
-      </li>
+  
+    <% @images.each do |tag_name, images| %>
+      Tag: <%= tag_name %>
+      <ul>
+        <% images.each do |image| %>
+          <li>
+            Name: <%= image.name %><br />
+              <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), "/uploads/#{image.name}", target: '_blank' %><br />
+              tags:
+              <ul class='tags'>
+              <% image.tags.each do |tag| %>
+                <li><%=tag.name %></li>
+              <% end %>
+              </ul>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
 <%end%>
