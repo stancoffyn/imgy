@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= require jquery.ui.all
+ *= require font-awesome
  */
 
 body{
@@ -59,4 +60,8 @@ body{
 
 .image{
 	width: 100px;
+}
+
+a.no-decor{
+	text-decoration: none;
 }

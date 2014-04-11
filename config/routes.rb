@@ -1,7 +1,10 @@
 Testsite::Application.routes.draw do
+  get "image/edit"
+  get "image/show"
+  get "image/index"
   resources :tags
   resources :upload
-
+  resources :image
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
