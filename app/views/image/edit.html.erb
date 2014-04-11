@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  var tags = <%==   @tags.all.map { |tag| tag.name }  %>;
+  var tags = <%== @tags  %>;
   $(function(){
     function split( val ) {
       return val.split( /,\s*/ );
@@ -41,18 +41,34 @@
   });
 </script>
 
-<%= form_tag({action: :create}, multipart: true) do %>
-  Name: <%= text_field_tag(:name) %><br />
-  <div id="load_from_url">
-  <%= check_box_tag(:from_url) %>
-  <%= label_tag(:from_url, "Load image from url") %><br />
+<h1><%= @image.name %></h1>
+<%= image_tag "/uploads/#{@image.name}" %>
+<%= form_for(@image) do |f| %>
+  <% if @image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
+
+      <ul>
+      <% @image.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag :image_file_type, @encrypted_image_file_type, you_really_shouldnt_edit_this_silly: 'noodle' %>
+  <div class='field' >
+    <%= label_tag :name %>
+    <%= text_field_tag :name, @name %>
   </div>
-  <%= check_box_tag(:animated) %>
-  <%= label_tag(:animated, "Animated gif") %>
-  <p>
-    <div id='file-upload'><%= file_field_tag 'image' %></div>
-    <div id='url-upload' style="display:none;"><%= text_field_tag(:url_field) %></div>
-  </p>
-  Tags: <%= text_field_tag(:tags) %><br />
-  <%= submit_tag('save') %>
+  <div class='field' >
+    <%= label_tag :tags %>
+    <%= text_field_tag :tags, @image.tags.map{ |t| t.name }.join(', ') %>
+  </div>
+  <div class='field' >
+    <%= label_tag :image_type, 'Animated Image?' %>
+    <%= f.check_box :image_type, {}, 'animated', 'static' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>

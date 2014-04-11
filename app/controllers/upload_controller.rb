@@ -52,12 +52,14 @@ class UploadController < ApplicationController
     if !params[:tags].nil?
       tags = params[:tags].split(',')
       tags.each do |t|
-        tag = Tag.find_by name: t.strip
-        if tag.nil?
-          tag = Tag.create!(name: t.strip)
-        end
+        unless t.strip.empty?
+          tag = Tag.find_by name: t.strip
+          if tag.nil?
+            tag = Tag.create!(name: t.strip)
+          end
 
-        @image.tags.push tag
+          @image.tags.push tag
+        end
       end
     end
 
