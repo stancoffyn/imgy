@@ -4,10 +4,13 @@ class SearchController < ApplicationController
     @query = params[:query]
     @all_tags = Tag.all.map { |t| t.name }
     @tags = Tag.where('name like ?', '%' + @query + '%')
-    @images = Hash.new
+    @images = []
 
     @tags.each do |tag|
-        @images[tag.name] = tag.images
+        tag_images = tag.images
+        @images.concat tag_images
     end
+
+    @images.uniq!
   end
 end
