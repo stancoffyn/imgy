@@ -2,6 +2,8 @@ require 'pry'
 require 'open-uri'
 
 class UploadController < ApplicationController
+  before_action :authenticate_admin!
+
   def new
     @image = Image.new  
     @tags = Tag.all

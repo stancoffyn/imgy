@@ -1,4 +1,5 @@
 Testsite::Application.routes.draw do
+  devise_for :admins
   get "image/edit"
   get "image/show"
   get "image/index"

@@ -7,13 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="title"><span class="brand">IMGY</span> - houck's image source</div>
+<div class="title">
+  <div id="logo">
+    <span class="brand">IMGY</span> - houck's image source</div>
+  </div>
+  <div id="authorization">
+    <% if admin_signed_in? %>
+      <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign In", new_admin_session_path %>
+
+    <% end %>
+  </div>
 <div class="nav">
 	<ul>
 		<li><%= link_to 'HOME', home_path %></li>
 		<li><%= link_to 'UPLOAD', new_upload_path %></li>
     <li><%= link_to 'IMAGES', image_index_path %></li>
 	</ul>
+</div>
+<div class="alerts" >
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 </div>
 <div class="content">
 	<%= yield %>
