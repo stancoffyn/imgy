@@ -3,7 +3,7 @@ require 'fileutils'
 
 class ImageController < ApplicationController
   before_action :set_image, only: [:edit, :show, :update]
-
+  before_action :authenticate_admin!, only: [:edit, :update]
   #decrypted_back = crypt.decrypt_and_verify(encrypted_data)
 
   def self.image_secret
