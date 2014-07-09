@@ -3,6 +3,7 @@ require 'open-uri'
 
 class UploadController < ApplicationController
   before_action :authenticate_admin!
+  before_action :upload_params, only: [:create]
 
   def new
     @image = Image.new  
@@ -10,56 +11,32 @@ class UploadController < ApplicationController
   end
 
   def create
-    upload_params
     @image = Image.new(source_url: params[:url_field])
     if !params[:from_url].nil?
-      #get the image from the interwebs via some load thang
-      file_type = params[:url_field].split('.').last
+      p 'we know that we are in the upload portion now'
+      @image.name = get_file_name params[:name], params[:url_field].split('.').last.split('?').first
+      p 'past the new file name detection stuff'
 
-      if !is_valid_file_type (file_type)
-
-      end
-
-      name = "#{params[:name]}.#{file_type}"
-
-      File.open(Rails.root.join('public', 'uploads', name), 'wb') do |file|
+      File.open get_file_path(@image.name), 'wb' do |file|
         file.write open(params[:url_field]).read
       end
-
-      @image.name = name
-
     elsif !params[:image].nil?
-      #check that a file was uploaded via pick a file      
       image_io = params[:image]
-      file_type = image_io.original_filename.split('.').last
-  
-      if !is_valid_file_type (file_type)
+      @image.name = get_file_name( params[:name], image_io.original_filename.split('.').last )
 
-      end
-
-      @image.name = "#{params[:name]}.#{file_type}"
-      File.open(Rails.root.join('public', 'uploads', @image.name), 'wb') do |file|
+      File.open(get_file_path(@image.name), 'wb') do |file|
         file.write(image_io.read)
       end  
-      #edge: check for name in use 
-      # check file type (ANIMATED vs. STATIC)
     end
 
-    if !params[:animated].nil?
-      @image.image_type = 'animated'
-    else
-      @image.image_type = 'static'
-    end
+    @image.image_type = params[:animated].nil? ? 'static' : 'animated'
 
     if !params[:tags].nil?
       tags = params[:tags].split(',')
       tags.each do |t|
         unless t.strip.empty?
           tag = Tag.find_by name: t.strip
-          if tag.nil?
-            tag = Tag.create!(name: t.strip)
-          end
-
+          tag = tag.nil? ? tag = Tag.create!(name: t.strip) : tag 
           @image.tags.push tag
         end
       end
@@ -69,9 +46,29 @@ class UploadController < ApplicationController
       if @image.save
         format.html { redirect_to home_path, notice: 'image was successfully created.' }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', alert: 'An error occured saving the record to the database.' }
       end    
     end
+  end
+
+  def get_file_name(file_name, file_type)
+    unless !File.exists? get_file_path("#{file_name}.#{file_type}")
+      path = get_file_path "#{file_name}.#{file_type}"
+      p "file exists I guess: #{path}"
+      append = 0
+      begin
+        append += 1
+        p 'adding another number'
+      end while (File.exists?(get_file_path("#{file_name} #{append}.#{file_type}"))) || append > 10
+
+      file_name = "#{file_name} #{append}"
+    end
+    
+    "#{file_name}.#{file_type}"
+  end
+
+  def get_file_path(filename)
+    Rails.root.join('public', 'uploads', filename)
   end
 
   def is_valid_file_type (file_type)
