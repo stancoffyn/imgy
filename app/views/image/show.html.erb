@@ -1,2 +1,12 @@
-<h1>Image#show</h1>
-<p>Find me in app/views/image/show.html.erb</p>
+<h1><%= @image.name %></h1>
+<%= link_to 'LINK', "/uploads/#{@image.name}", target: '_blank' %>
+<p>
+  <%= image_tag "/uploads/#{@image.name}", alt: @image.name %>
+
+  <h4>Tags:</h4>
+  <ul>
+    <% @image.tags.each do |tag| %>
+      <li><%= tag.name %></li>
+    <% end %>
+  </ul>
+</p>

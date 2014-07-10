@@ -15,8 +15,23 @@
       <tr>
         <td><%= tag.name %></td>
         <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if admin_signed_in? %>
+            <%= link_to 'Edit', edit_tag_path(tag) %>
+          <% end %>
+        </td>
+        <td>
+          <% if admin_signed_in? %>
+            <%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="4"> 
+          <% tag.images.each do |image| %>
+            <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), image_path(image), target: '_blank' %>
+          <% end %>
+       </td>
       </tr>
     <% end %>
   </tbody>
