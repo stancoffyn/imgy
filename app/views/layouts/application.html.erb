@@ -7,32 +7,44 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="title">
-  <div id="logo">
-    <span class="brand">IMGY</span> - houck's image source</div>
-  </div>
-  <div id="authorization">
-    <% if admin_signed_in? %>
-      <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign In", new_admin_session_path %>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><span class="brand">IMGY</span></li>
+          <li class="<%= 'active' if params[:controller] == 'home' %>" ><%= link_to 'HOME', home_path, id: 'home-link' %></li>
+          <li class="<%= 'active' if params[:controller] == 'upload' %>" ><%= link_to 'UPLOAD', new_upload_path, id: 'upload-link' %></li>
+          <li class="<%= 'active' if params[:controller] == 'image' %>" ><%= link_to 'IMAGES', image_index_path, id: 'images-link' %></li>
+          <li class="<%= 'active' if params[:controller] == 'tags' %>" ><%= link_to 'TAGS', tags_path, id: 'tags-link' %></li>
 
-    <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <% if admin_signed_in? %>
+              <%= link_to "Sign Out", destroy_admin_session_path, method: :delete %>
+            <% else %>
+              <%= link_to "Sign In", new_admin_session_path %>
+
+            <% end %>      
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+  <div class="content container">
+    <div class="alerts" >
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+  	<%= yield %>
   </div>
-<div class="nav">
-	<ul>
-		<li><%= link_to 'HOME', home_path, id: 'home-link' %></li>
-		<li><%= link_to 'UPLOAD', new_upload_path, id: 'upload-link' %></li>
-    <li><%= link_to 'IMAGES', image_index_path, id: 'images-link' %></li>
-    <li><%= link_to 'TAGS', tags_path, id: 'tags-link' %></li>
-	</ul>
-</div>
-<div class="alerts" >
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-</div>
-<div class="content">
-	<%= yield %>
-</div>
 </body>
 </html>

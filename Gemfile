@@ -5,11 +5,20 @@ gem 'rails', '4.0.1'
 gem 'rb-readline'
 # Use mysql as the database for Active Record
 gem 'mysql2'
+#bootstrap support
+gem 'bootstrap-sass', '~> 3.3.1'
+
+# mobile agent detection
+gem 'browser'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'execjs'
 gem 'therubyracer'
+# copy to clipboard support
+gem 'zeroclipboard-rails'
+
+gem 'autoprefixer-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

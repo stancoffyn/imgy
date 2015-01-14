@@ -1,6 +1,6 @@
 <h1>Listing tags</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name:</th>
@@ -14,6 +14,11 @@
     <% @tags.each do |tag| %>
       <tr>
         <td><%= tag.name %></td>
+        <td> 
+          <% tag.images.each do |image| %>
+            <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), image_path(image), target: '_blank' %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', tag %></td>
         <td>
           <% if admin_signed_in? %>
@@ -25,13 +30,6 @@
             <%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
         </td>
-      </tr>
-      <tr>
-        <td rowspan="4"> 
-          <% tag.images.each do |image| %>
-            <%= link_to image_tag("/uploads/#{image.name}", alt: image.name, class: 'image'), image_path(image), target: '_blank' %>
-          <% end %>
-       </td>
       </tr>
     <% end %>
   </tbody>
