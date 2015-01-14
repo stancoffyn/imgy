@@ -15,4 +15,6 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require turbolinks
+//= require bootstrap-sprockets
+//= require zeroclipboard
 //= require_tree .
