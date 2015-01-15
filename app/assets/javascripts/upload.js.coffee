@@ -15,8 +15,13 @@ $ ->
     return null
 
   $('#url-upload').change ->
-    #this could get really ugly
-    split = $('#url_field').val().split('/')
-    fileName = split[split.length - 1]
-    fileName = fileName.replace(/\.[^/.]+$/, '')
-    $('#name').val(fileName)
+    # this could get really ugly 
+    # only update the field if it is blank
+    # removing a name for a filename hint is 
+    # not very enjoyable
+    field = $('#name')
+    if field.val() == ""
+        split = $('#url_field').val().split('/')
+        fileName = split[split.length - 1]
+        fileName = fileName.replace(/\.[^/.]+$/, '')
+        field.val(fileName)
