@@ -23,7 +23,7 @@ var tags = <%==   @all_tags  %>;
             <%= image.tags.collect(&:name).join(', ') %>
           </p>
           <p>
-            <a class="btn btn-primary" id="image-url" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}/uploads/#{image.name}" %>">Copy Url
+            <a class="btn btn-primary" id="image-url" data-clipboard-text="<%= "#{request.protocol}#{request.host_with_port}/uploads/#{url_encode image.name}" %>">Copy Url
             </a>
           </p>
         </div>
@@ -35,8 +35,19 @@ var tags = <%==   @all_tags  %>;
 
 <script>
 
-$(document).ready(function(){
-  var clip = new ZeroClipboard($("#image-url"));
+//$(document).ready(function(){
+//  var clip = new ZeroClipboard($("#image-url"));
+//};
+
+// The page has been parsed and changed to the new version and on DOMContentLoaded
+document.addEventListener("page:change", function(){
+  // initialize ZeroClipboard here
+  var zeroClipboard = new ZeroClipboard($('a.btn-primary'));
+});
+
+// A Turbolinks-enabled link has been clicked
+document.addEventListener("page:before-change", function(){
+  ZeroClipboard.destroy();
 });
 
 </script>
