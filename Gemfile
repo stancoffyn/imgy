@@ -3,8 +3,10 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 gem 'rb-readline'
+
 # Use mysql as the database for Active Record
 gem 'mysql2'
+
 #bootstrap support
 gem 'bootstrap-sass', '~> 3.3.1'
 
@@ -15,6 +17,7 @@ gem 'browser'
 gem 'sass-rails', '~> 4.0.0'
 gem 'execjs'
 gem 'therubyracer'
+
 # copy to clipboard support
 gem 'zeroclipboard-rails'
 
@@ -32,10 +35,12 @@ gem 'devise'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~>5.0'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'font-awesome-rails'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
